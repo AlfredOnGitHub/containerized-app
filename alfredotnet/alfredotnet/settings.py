@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -69,16 +71,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'alfredotnet.wsgi.application'
 
+# Environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+environ.Env.read_env(os.path.join(os.path.dirname(os.path.abspath(__file__)), '.env'))
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('DB_Database'),
+        'USER': env('DB_User'),
+        'PASSSWORD': env('DB_Password'),
+        'HOST': env('DB_Host', default='localhost'),
+        'PORT': env('DB_Port', default='5432'),
     }
 }
+
+print("Database: ", env('DB_Database'))
+print("User: ", env('DB_User'))
+print("Password: ", env('DB_Password'))
+print("Host: ", env('DB_Host'))
+print("Port: ", env('DB_Port'))
 
 
 # Password validation
