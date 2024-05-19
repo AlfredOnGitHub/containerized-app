@@ -73,6 +73,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'alfredotnet.wsgi.application'
 
 # Environ
+# Makes sure it reads the .env file.
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -92,13 +93,6 @@ DATABASES = {
         'PORT': env('DB_Port', default='5432'),
     }
 }
-
-print("Database: ", env('DB_Database'))
-print("User: ", env('DB_User'))
-print("Password: ", env('DB_Password'))
-print("Host: ", env('DB_Host'))
-print("Port: ", env('DB_Port'))
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

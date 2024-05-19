@@ -8,4 +8,11 @@ class vGame(models.Model):
     rating = models.FloatField()
 
     def __str__(self):
+
+        """
+        Initializes the vGame Class to create the model.
+
+        Return: 
+            self.title: vGame title
+        """
         return self.title

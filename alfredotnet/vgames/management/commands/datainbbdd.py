@@ -3,9 +3,15 @@ from vgames.models import vGame
 import random
 
 class Command(BaseCommand):
+    
+
     info = 'Populate the DB with vGames'
 
     def handle(self, *args, **kwargs):
+
+        """
+        Initialize the Command Class in order to populate the database we have.
+        """        
 
         vGame.objects.all().delete()
         titles = ["Game " + str(i) for i in range (1,101)]
